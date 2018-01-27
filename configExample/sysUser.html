@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="http://g.alicdn.com/sj/dpl/1.5.1/css/sui.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://g.alicdn.com/sj/lib/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="http://g.alicdn.com/sj/dpl/1.5.1/js/sui.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#userQuery").click(function(){
+                var sysUser = {id: "2"};
+                $.ajax({
+                    type : 'GET',
+                    url : 'pk',
+                    async:true,
+                    data : sysUser,
+                    dataType : 'json',
+                    success : function(data){
+                        alert(JSON.stringify(data));
+                    },
+                    error : function(){
+                        alert("查找不到记录");
+                    }
+                });
+            })
+
+            $("#userInsert").click(function(){
+                $.ajax({
+                    type : 'POST',
+                    url : 'pk',
+                    data : {_method:"PUT",id: "2", username:"cat"},
+                    async:true,
+                    dataType : 'json',
+                    success : function(data){
+                        alert(data);
+                    },
+                    error : function(){
+                        alert("failed");
+                    }
+                });
+            })
+
+            $("#userUpdate").click(function(){
+                $.ajax({
+                    type : 'POST',
+                    url : 'pk',
+                    data : {id: "2", username:"cat1"},
+                    async:true,
+                    dataType : 'json',
+                    success : function(data){
+                        alert(data);
+                    },
+                    error : function(){
+                        alert("failed");
+                    }
+                });
+            })
+
+            $("#userDelete").click(function(){
+                $.ajax({
+                    type : 'POST',
+                    url : 'pk',
+                    data : {_method:"DELETE",id: "2"},
+                    async:true,
+                    dataType : 'json',
+                    success : function(data){
+                        alert(JSON.stringify(data));
+                    },
+                    error : function(){
+                        alert("failed");
+                    }
+                });
+            })
+            $("#custom").click(function(){
+                $.ajax({
+                    type : 'GET',
+                    url : 'selectAll',
+                    async:true,
+                    dataType : 'json',
+                    success : function(data){
+                        alert(JSON.stringify(data));
+                    },
+                    error : function(){
+                        alert("failed");
+                    }
+                });
+            })
+        })
+    </script>
+</head>
+<body>
+
+用户页面
+<br>
+
+<input id="userQuery"  type="button" value="查询" />
+<input id="userInsert"  type="button" value="新增" />
+<input id="userUpdate"  type="button" value="修改" />
+<input id="userDelete"  type="button" value="删除" />
+<input id="custom"  type="button" value="查询全部" />
+
+<table></table>
+</body>
+</html>
