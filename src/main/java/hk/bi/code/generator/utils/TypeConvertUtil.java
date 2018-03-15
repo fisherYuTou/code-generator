@@ -83,6 +83,8 @@ public class TypeConvertUtil {
             returnType = "String";
         }else if( "date".equals(typeName) || "timestamp".equals(typeName)){
             returnType = "Timestamp";
+        }else if( "float4".equals(typeName)){
+            returnType = "double";
         }else{
             returnType = "String";
         }
@@ -110,6 +112,8 @@ public class TypeConvertUtil {
             returnType = "VARCHAR";
         }else if( "date".equals(typeName) || "timestamp".equals(typeName)){
             returnType = "TIMESTAMP";
+        }else if( "float4".equals(typeName)){
+            returnType = "DOUBLE";
         }else{
             returnType = "VARCHAR";
         }
