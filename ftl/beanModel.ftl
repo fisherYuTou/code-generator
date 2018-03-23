@@ -17,6 +17,9 @@ public class ${tableInfo.className} {
     private  ${column.proType} ${column.proName};
     </#list>
 
+    /** 方法名 */
+    private String _method;
+
     <#-- 生成set方法和get方法 -->
     <#list tableInfo.columns as column>
     public ${column.proType} get${column.proName?cap_first}() {
@@ -26,5 +29,13 @@ public class ${tableInfo.className} {
     this.${column.proName} = ${column.proName};
     }
     </#list>
+
+    public String get_method() {
+        return _method;
+    }
+
+    public void set_method(String _method) {
+        this._method = _method;
+    }
 
 }
