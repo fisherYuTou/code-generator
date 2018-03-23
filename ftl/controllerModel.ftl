@@ -54,7 +54,7 @@ public class ${tableInfo.className}Controller{
     *  @param record 表记录
     *  @return 插入结果
     */
-    @RequestMapping(method=RequestMethod.PUT)
+    @RequestMapping(method=RequestMethod.POST)
     @ResponseBody
     public int insertRecord(@RequestBody ${tableInfo.className} record){
         return ${tableInfo.variableName}Service.insertRecord(record);
@@ -66,7 +66,7 @@ public class ${tableInfo.className}Controller{
     *  @param record 表记录
     *  @return 更新结果
     */
-    @RequestMapping(method=RequestMethod.POST)
+    @RequestMapping(method=RequestMethod.PUT)
     @ResponseBody
     public int updateRecordByKey(@RequestBody ${tableInfo.className} record){
         return ${tableInfo.variableName}Service.updateRecordByKey(record);
