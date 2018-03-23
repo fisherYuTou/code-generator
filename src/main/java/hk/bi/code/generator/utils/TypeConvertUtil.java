@@ -71,7 +71,9 @@ public class TypeConvertUtil {
     public static String postgresqlToJava(String typeName){
 
         String returnType;
-        if("int2".equals(typeName)){
+        if("serial".equals(typeName)){
+            returnType = "long";
+        }else if("int2".equals(typeName)){
             returnType = "short";
         }else if( "int4".equals(typeName)){
             returnType = "int";
@@ -100,7 +102,9 @@ public class TypeConvertUtil {
 
         String returnType;
 
-        if("int2".equals(typeName)){
+        if("serial".equals(typeName)){
+            returnType = "BIGINT";
+        }else if("int2".equals(typeName)){
             returnType = "SMALLINT";
         }else if( "int4".equals(typeName)){
             returnType = "INTEGER";
