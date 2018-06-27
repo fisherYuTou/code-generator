@@ -6,15 +6,16 @@ import ${packageName}.domain.${tableInfo.className}Key;
 </#if>
 import java.util.*;
 
-/** 表 ${tableInfo.tableName} mapper
-*
+/**
+* 表 ${tableInfo.tableName} mapper
 * @author 自动生成
-* date ${.now}
+* @date ${.now}
 */
 public interface ${tableInfo.className}Mapper {
 
     <#if tableInfo.keyCount gt 0 >
-    /**  按主键查询记录
+    /**
+    *  按主键查询记录
     *  @param key 主键
     *  @return ${tableInfo.tableCommnets}
     */
@@ -24,8 +25,6 @@ public interface ${tableInfo.className}Mapper {
     ${tableInfo.className} selectRecordByKey(${tableInfo.className}Key key);
         </#if>
     </#if>
-
-
     <#if tableInfo.tableType == "TABLE">
     /**  表插入
     *  @param record 表记录
@@ -33,7 +32,6 @@ public interface ${tableInfo.className}Mapper {
     */
     int insertRecord(${tableInfo.className} record);
     </#if>
-
     <#if tableInfo.keyCount gt 0 >
     /**  按主键更新
     *  @param record 表记录
@@ -41,7 +39,13 @@ public interface ${tableInfo.className}Mapper {
     */
     int updateRecordByKey(${tableInfo.className} record);
     </#if>
-
+    <#if tableInfo.keyCount gt 0 >
+    /**  按主键更新（为空则不更新）
+    *  @param record 表记录
+    *  @return 更新结果
+    */
+    int updateRecordSelectiveByKey(${tableInfo.className} record);
+    </#if>
     <#if tableInfo.keyCount gt 0 >
     /**  按主键删除
     *  @param key 主键
@@ -53,8 +57,6 @@ public interface ${tableInfo.className}Mapper {
     int deleteRecordByKey(${tableInfo.className}Key key);
         </#if>
     </#if>
-
-
     /**  查询所有记录
     *  @return
     */
