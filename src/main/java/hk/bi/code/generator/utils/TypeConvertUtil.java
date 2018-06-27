@@ -4,6 +4,66 @@ import org.apache.commons.lang3.StringUtils;
 
 public class TypeConvertUtil {
 
+//    /** oracle类型转化成JAVA类型
+//     *
+//     * @param typeName  类型名称
+//     * @param length    总长度
+//     * @param demicalLength  小位数长度
+//     * @return
+//     */
+//    public static String oracleToJava(String typeName, String length, String demicalLength){
+//
+//        System.out.println(typeName);
+//
+//        String returnType;
+//        if("NUMBER".equals(typeName)){
+//            if(demicalLength != null && Integer.parseInt(demicalLength) == 0){
+//                returnType = "int";
+//            }else{
+//                returnType = "BigDecimal";
+//            }
+//        }
+//        else if( "DATE".equals(typeName) || "TIMESTAMP(6)".equals(typeName)){
+//            returnType = "Timestamp";
+//        }else if( "BLOB".equals(typeName)){
+//            returnType = "byte[]";
+//        }else if( "CLOB".equals(typeName)){
+//            returnType = "String";
+//        }else{
+//            returnType = "String";
+//        }
+//        return returnType;
+//    }
+//
+//    /** oracle类型转化成jdbc类型
+//     *
+//     * @param typeName  类型名称
+//     * @param length    总长度
+//     * @param demicalLength  小位数长度
+//     * @return
+//     */
+//    public static String oracleToJdbc(String typeName, String length, String demicalLength){
+//
+//        String returnType;
+//        if("NUMBER".equals(typeName)){
+//            if(demicalLength != null && Integer.parseInt(demicalLength) == 0){
+//                returnType = "INTEGER";
+//            }else{
+//                returnType = "DECIMAL";
+//            }
+//        }else if( "DATE".equals(typeName) || "TIMESTAMP(6)".equals(typeName)){
+//            returnType = "TIMESTAMP";
+//        }else if( "BLOB".equals(typeName)){
+//            returnType = "BLOB";
+//        }else if( "CLOB".equals(typeName)){
+//            returnType = "CLOB";
+//        }else if( "DATE".equals(typeName) || "TIMESTAMP(6)".equals(typeName)){
+//            returnType = "TIMESTAMP";
+//        }else{
+//            returnType = "VARCHAR";
+//        }
+//        return returnType;
+//    }
     /** oracle类型转化成JAVA类型
      *
      * @param typeName  类型名称
@@ -11,16 +71,15 @@ public class TypeConvertUtil {
      * @param demicalLength  小位数长度
      * @return
      */
-    public static String oracleToJava(String typeName, String length, String demicalLength){
+    public static String oracleToJava(String typeName){
+
+        System.out.println(typeName);
 
         String returnType;
         if("NUMBER".equals(typeName)){
-            if(demicalLength != null && Integer.parseInt(demicalLength) == 0){
-                returnType = "int";
-            }else{
-                returnType = "BigDecimal";
-            }
-        }else if( "DATE".equals(typeName) || "TIMESTAMP(6)".equals(typeName)){
+            returnType = "int";
+        }
+        else if( "DATE".equals(typeName) || "TIMESTAMP(6)".equals(typeName)){
             returnType = "Timestamp";
         }else if( "BLOB".equals(typeName)){
             returnType = "byte[]";
@@ -39,15 +98,11 @@ public class TypeConvertUtil {
      * @param demicalLength  小位数长度
      * @return
      */
-    public static String oracleToJdbc(String typeName, String length, String demicalLength){
+    public static String oracleToJdbc(String typeName){
 
         String returnType;
         if("NUMBER".equals(typeName)){
-            if(demicalLength != null && Integer.parseInt(demicalLength) == 0){
-                returnType = "INTEGER";
-            }else{
-                returnType = "DECIMAL";
-            }
+            returnType = "INTEGER";
         }else if( "DATE".equals(typeName) || "TIMESTAMP(6)".equals(typeName)){
             returnType = "TIMESTAMP";
         }else if( "BLOB".equals(typeName)){
@@ -63,6 +118,8 @@ public class TypeConvertUtil {
     }
 
 
+
+
     /** postgresql类型转化成JAVA类型
      *
      * @param typeName  类型名称
@@ -71,13 +128,11 @@ public class TypeConvertUtil {
     public static String postgresqlToJava(String typeName){
 
         String returnType;
-        if("serial".equals(typeName)){
-            returnType = "long";
-        }else if("int2".equals(typeName)){
+        if("int2".equals(typeName)){
             returnType = "short";
-        }else if( "int4".equals(typeName)){
+        }else if( "int4".equals(typeName) || "serial".equals(typeName)){
             returnType = "int";
-        }else if( "int8".equals(typeName)){
+        }else if( "int8".equals(typeName) || "bigserial".equals(typeName)){
             returnType = "long";
         }else if( "numeric".equals(typeName)){
             returnType = "BigDecimal";
@@ -102,13 +157,11 @@ public class TypeConvertUtil {
 
         String returnType;
 
-        if("serial".equals(typeName)){
-            returnType = "BIGINT";
-        }else if("int2".equals(typeName)){
+        if("int2".equals(typeName)){
             returnType = "SMALLINT";
-        }else if( "int4".equals(typeName)){
+        }else if( "int4".equals(typeName) || "serial".equals(typeName)){
             returnType = "INTEGER";
-        }else if( "int8".equals(typeName)){
+        }else if( "int8".equals(typeName) || "bigserial".equals(typeName)){
             returnType = "BIGINT";
         }else if( "numeric".equals(typeName)){
             returnType = "DECIMAL";
