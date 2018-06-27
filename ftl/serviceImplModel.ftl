@@ -35,7 +35,6 @@ public class ${tableInfo.className}ServiceImpl implements ${tableInfo.className}
         return ${tableInfo.variableName}Mapper.selectRecordByKey(key);
     }
     </#if>
-
     <#if tableInfo.tableType == "TABLE">
     /**  表插入
     *  @param record 表记录
@@ -46,7 +45,6 @@ public class ${tableInfo.className}ServiceImpl implements ${tableInfo.className}
         return ${tableInfo.variableName}Mapper.insertRecord(record);
     }
     </#if>
-
     <#if tableInfo.keyCount gt 0 >
     /**  按主键更新
     *  @param record 表记录
@@ -57,7 +55,16 @@ public class ${tableInfo.className}ServiceImpl implements ${tableInfo.className}
         return ${tableInfo.variableName}Mapper.updateRecordByKey(record);
     }
     </#if>
-
+    <#if tableInfo.keyCount gt 0 >
+    /**  按主键更新（为空则不更新）
+    *  @param record 表记录
+    *  @return 更新结果
+    */
+    @Override
+    public int updateRecordSelectiveByKey(${tableInfo.className} record){
+        return ${tableInfo.variableName}Mapper.updateRecordSelectiveByKey(record);
+    }
+    </#if>
     <#if tableInfo.keyCount gt 0 >
     /**  按主键删除
     *  @param key 主键
@@ -72,7 +79,6 @@ public class ${tableInfo.className}ServiceImpl implements ${tableInfo.className}
         return ${tableInfo.variableName}Mapper.deleteRecordByKey(key);
     }
     </#if>
-
     /**  查询所有记录
     *  @return
     */
