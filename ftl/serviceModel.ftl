@@ -23,8 +23,6 @@ public interface ${tableInfo.className}Service {
     ${tableInfo.className} selectRecordByKey(${tableInfo.className}Key key);
         </#if>
     </#if>
-
-
     <#if tableInfo.tableType == "TABLE">
     /**  表插入
     *  @param record 表记录
@@ -32,7 +30,6 @@ public interface ${tableInfo.className}Service {
     */
     int insertRecord(${tableInfo.className} record);
     </#if>
-
     <#if tableInfo.keyCount gt 0 >
     /**  按主键更新
     *  @param record 表记录
@@ -40,7 +37,13 @@ public interface ${tableInfo.className}Service {
     */
     int updateRecordByKey(${tableInfo.className} record);
     </#if>
-
+    <#if tableInfo.keyCount gt 0 >
+    /**  按主键更新（为空则不更新）
+    *  @param record 表记录
+    *  @return 更新结果
+    */
+    int updateRecordSelectiveByKey(${tableInfo.className} record);
+    </#if>
     <#if tableInfo.keyCount gt 0 >
     /**  按主键删除
     *  @param key 主键
@@ -52,8 +55,6 @@ public interface ${tableInfo.className}Service {
     int deleteRecordByKey(${tableInfo.className}Key key);
         </#if>
     </#if>
-
-
     /**  查询所有记录
     *  @return
     */
