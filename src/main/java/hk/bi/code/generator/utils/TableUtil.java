@@ -45,7 +45,7 @@ public class TableUtil {
         //获取当前连接的数据库名
         tableBean.setCatalog(conn.getCatalog());
         //  获取表信息
-        ResultSet tableInfo = databaseMetaData.getTables(conn.getCatalog(), null, tableName, null );
+        ResultSet tableInfo = databaseMetaData.getTables(conn.getCatalog(), schemaName, tableName, null );
         while(tableInfo.next()) {
             tableBean.setTableName(tableInfo.getString("TABLE_NAME"));
             String comments = tableInfo.getString("REMARKS");
@@ -96,8 +96,8 @@ public class TableUtil {
      */
     public static List<FieldBean> getTableColumns(String schemaName,String tableName) throws SQLException {
         DatabaseMetaData databaseMetaData = conn.getMetaData();
-        ResultSet columnsInfo = databaseMetaData.getColumns(null,"public", tableName,"%");
-        List<String> pks = getTablePrimaryKeys(tableName);
+        ResultSet columnsInfo = databaseMetaData.getColumns(null,schemaName, tableName,"%");
+        List<String> pks = getTablePrimaryKeys(tableName,schemaName);
         List<FieldBean> columns = new ArrayList<FieldBean>();
         while(columnsInfo.next()) {
             FieldBean fieldBean = new FieldBean();
@@ -109,9 +109,11 @@ public class TableUtil {
                 fieldBean.setPrimaryKey(false);
             }
             fieldBean.setProType(TypeConvertUtil.postgresqlToJava(columnsInfo.getString("TYPE_NAME")));
+//            fieldBean.setProType(TypeConvertUtil.oracleToJava(columnsInfo.getString("TYPE_NAME")));
             fieldBean.setComments(columnsInfo.getString("REMARKS"));
             fieldBean.setProName(StringUtil.toVariableName(columnName));
             fieldBean.setJdbcType(TypeConvertUtil.postgresqlToJdbc(columnsInfo.getString("TYPE_NAME")));
+//            fieldBean.setJdbcType(TypeConvertUtil.oracleToJdbc(columnsInfo.getString("TYPE_NAME")));
             columns.add(fieldBean);
         }
         return columns;
@@ -161,9 +163,9 @@ public class TableUtil {
      * @return
      * @throws SQLException
      */
-    public static List<String> getTablePrimaryKeys(String tableName) throws SQLException {
+    public static List<String> getTablePrimaryKeys(String tableName, String schemaName) throws SQLException {
         DatabaseMetaData databaseMetaData = conn.getMetaData();
-        ResultSet pkInfo = databaseMetaData.getPrimaryKeys(conn.getCatalog(),"public", tableName);
+        ResultSet pkInfo = databaseMetaData.getPrimaryKeys(conn.getCatalog(),schemaName, tableName);
         List<String> pk = new ArrayList<String>();
         while(pkInfo.next()) {
             pk.add(pkInfo.getString("COLUMN_NAME"));
