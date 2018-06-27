@@ -14,7 +14,7 @@
     <sql id="Base_Column_List">
     <#list tableInfo.columns as column>
     <#if column_index = 0>
-        ${column.fieldName}
+         ${column.fieldName}
     <#else>
         ,${column.fieldName}
     </#if>
@@ -46,11 +46,19 @@
 
     <#if tableInfo.tableType = "TABLE">
     <insert id="insertRecord" parameterType="${packageName}.domain.${tableInfo.className}">
-        insert into ${tableInfo.tableName} (<include refid="Base_Column_List" />)
+        insert into ${tableInfo.tableName} (
+        <#list tableInfo.columns as column>
+            <#if column_index = 0>
+                 ${column.fieldName}
+            <#else>
+                ,${column.fieldName}
+            </#if>
+        </#list>
+        )
         values (
         <#list tableInfo.columns as column>
             <#if column_index = 0>
-                ${column.jdbcQuery}
+                 ${column.jdbcQuery}
             <#else>
                 ,${column.jdbcQuery}
             </#if>
@@ -78,6 +86,29 @@
         </#list>
     </update>
     </#if>
+
+
+<#if tableInfo.keyCount gt 0 >
+    <update id="updateRecordSelectiveByKey" parameterType="${packageName}.domain.${tableInfo.className}">
+        update ${tableInfo.tableName}
+        <set>
+            <#list tableInfo.columns as column>
+                <#if !column.primaryKey>
+            <if test="${column.proName}!=null">${column.fieldName} = ${column.jdbcQuery},</if>
+                </#if>
+            </#list>
+        </set>
+        <#list tableInfo.primaryKeys as column>
+            <#if column_index = 0>
+         where ${column.fieldName} =  ${column.jdbcQuery}
+            <#else>
+                and ${column.fieldName} =  ${column.jdbcQuery}
+            </#if>
+        </#list>
+    </update>
+</#if>
+
+
 
     <#if tableInfo.keyCount gt 0 >
     <delete id="deleteRecordByKey"
