@@ -17,7 +17,7 @@ public class Main {
 
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
-    //可配置
+    //可配置11111
     private static String beanBasePath = null;
     private static String mappingBasePath = null;
     private static String mapperBasePath = null;
