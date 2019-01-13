@@ -17,7 +17,7 @@ public class Main {
 
     private static Logger logger = LoggerFactory.getLogger(Main.class);
 
-    //可配置--github
+    //可配置--idea
     private static String beanBasePath = null;
     private static String mappingBasePath = null;
     private static String mapperBasePath = null;
