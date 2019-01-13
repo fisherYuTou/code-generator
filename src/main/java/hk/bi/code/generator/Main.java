@@ -33,7 +33,7 @@ public class Main {
      */
     public static void main(String[] args) {
 
-        // 读取orm文件生成路径
+        // 读取orm文件生成路径12122
         Properties props = PropertiesUtil.getProperties("common.properties");
         beanBasePath = props.getProperty("beanBasePath");
         mappingBasePath = props.getProperty("mappingBasePath");
